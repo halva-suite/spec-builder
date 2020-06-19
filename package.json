@@ -12,6 +12,9 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
+  "bin": {
+    "spec-builder": "./src/cli.ts"
+  },
   "files": [
     "dist/"
   ],
