@@ -1,11 +1,12 @@
 import Keyring from '@polkadot/keyring';
-import { cryptoWaitReady, mnemonicValidate } from '@polkadot/util-crypto';
+import { cryptoWaitReady, mnemonicValidate, mnemonicGenerate } from '@polkadot/util-crypto';
 import { u8aToHex } from '@polkadot/util'
 import { loadFromJSON, loadFromFile } from '.';
-import { JsonSpecBuilder } from './JsonSpecBuilder';
 export class SpecBuilder {
 
-    async CreateAccountsFromJSON(count: number, mnemo: string, balance: number, json: string) {
+    static async CreateAccountsFromJSON(count: number, balance: number, json: string, mnemo?: string, ) {
+        if (!mnemo)
+            mnemo = mnemonicGenerate();
         var keyringAura = await this.CreateKeysAura(count, mnemo);
         var keyringGrandpa = await this.CreateKeysGranpa(count, mnemo);
         var jsonSpec = loadFromJSON(json);
@@ -18,7 +19,9 @@ export class SpecBuilder {
         }
     }
 
-    async CreateAccounts(count: number, mnemo: string, balance: number, path: string) {
+    static async CreateAccounts(count: number, balance: number, path: string, mnemo?: string, ) {
+        if (!mnemo)
+            mnemo = mnemonicGenerate();
         var keyringAura = await this.CreateKeysAura(count, mnemo);
         var keyringGrandpa = await this.CreateKeysGranpa(count, mnemo);
         var jsonSpec = loadFromFile(path);
@@ -31,7 +34,7 @@ export class SpecBuilder {
         }
     }
 
-    async CreateKeysAura(count: number, mnemo: string): Promise<Keyring> {
+    static async CreateKeysAura(count: number, mnemo: string): Promise<Keyring> {
         await cryptoWaitReady();
         if (!mnemonicValidate(mnemo))
             throw new Error("Mnemonic phrase not valid")
@@ -48,7 +51,7 @@ export class SpecBuilder {
         return keyring;
     }
 
-    async CreateKeysGranpa(count: number, mnemo: string): Promise<Keyring> {
+    static async CreateKeysGranpa(count: number, mnemo: string): Promise<Keyring> {
         await cryptoWaitReady();
         if (!mnemonicValidate(mnemo))
             throw new Error("Mnemonic phrase not valid")
