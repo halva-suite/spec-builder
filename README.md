@@ -1,4 +1,6 @@
-#Spec-Builder
+# Spec-Builder
+
+---
 
 ## Installation
 ```bash
@@ -6,7 +8,7 @@ npm install halva-spec-builder
 ```
 ## Use Module
 
-  ```JavaScript
+  ```javascript
  import { SpecBuilder } from '../index';
 
  SpecBuilder.CreateAccounts(100, 1000, 'path/to/spec.json', 'clip organ olive upper oak void inject side suit toilet stick narrow');
