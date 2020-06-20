@@ -1,4 +1,4 @@
-import { SpecSchema } from "./SpecSchema";
+import { SpecSchema, Convert } from "./SpecSchema";
 
 export class JsonSpecBuilder {
 
@@ -25,5 +25,8 @@ export class JsonSpecBuilder {
 
     get GetChainSpec() {
         return this.SpecSchema;
+    }
+    get GetChainData() {
+        return Convert.specSchemaToJson(this.SpecSchema);
     }
 }

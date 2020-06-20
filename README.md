@@ -1,6 +1,5 @@
 # Spec-Builder
 
----
 
 ## Installation
 ```bash
@@ -8,6 +7,14 @@ npm install halva-spec-builder
 ```
 ## Use Module
 
+  ```bash
+  spec-builder -i /path/to/spec.json 
+
+  spec-builder -i /path/to/spec.json -a 100 -b 1152921504606847000
+
+  spec-builder -i /path/to/spec.json -a 100 -b 1152921504606847000 -m clip organ olive upper oak void inject side suit toilet stick narrow
+  ```
+  Or use a module TypeScript
   ```javascript
  import { SpecBuilder } from 'halva-spec-builder';
 
