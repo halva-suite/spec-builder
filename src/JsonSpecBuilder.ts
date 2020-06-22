@@ -10,7 +10,7 @@ export class JsonSpecBuilder {
     this.SpecSchema.genesis.runtime.grandpa.authorities.push(value);
   }
 
-  public AddAuraAuthorities(value: string): void {
+  public addAuraAuthorities(value: string): void {
     this.SpecSchema.genesis.runtime.aura.authorities.push(value);
   }
 

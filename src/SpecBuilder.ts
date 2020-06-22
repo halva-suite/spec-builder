@@ -11,8 +11,8 @@ export class SpecBuilder {
     mnemo?: string
   ): Promise<KeyringBundle> {
     if (!mnemo) mnemo = mnemonicGenerate();
-    const keyringAura = await this.CreateKeysAura(count, mnemo);
-    const keyringGrandpa = await this.CreateKeysGranpa(count, mnemo);
+    const keyringAura = await this.CreateAuraKeys(count, mnemo);
+    const keyringGrandpa = await this.CreateGrandpaKeys(count, mnemo);
     const jsonSpec = loadFromJSON(json);
     const pairsAura = keyringAura.getPairs();
     const pairsGrandpa = keyringGrandpa.getPairs();
@@ -21,13 +21,13 @@ export class SpecBuilder {
       jsonSpec.AddAuraAuthorities(pairsAura[i].publicKey.toString());
       jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].publicKey.toString(), 1]);
     }
-    return new KeyringBundle(keyringAura, keyringGrandpa);
+    return { Aura: keyringAura, Grandpa: keyringGrandpa };
   }
 
   static async CreateAccounts(count: number, balance: number, path: string, mnemo?: string): Promise<KeyringBundle> {
     if (!mnemo) mnemo = mnemonicGenerate();
-    const keyringAura = await this.CreateKeysAura(count, mnemo);
-    const keyringGrandpa = await this.CreateKeysGranpa(count, mnemo);
+    const keyringAura = await this.CreateAuraKeys(count, mnemo);
+    const keyringGrandpa = await this.CreateGrandpaKeys(count, mnemo);
     const jsonSpec = loadFromFile(path);
     const pairsAura = keyringAura.getPairs();
     const pairsGrandpa = keyringGrandpa.getPairs();
@@ -37,10 +37,10 @@ export class SpecBuilder {
       jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].address, 1]);
     }
     writeToFile(path, jsonSpec.GetChainData);
-    return new KeyringBundle(keyringAura, keyringGrandpa);
+    return { Aura: keyringAura, Grandpa: keyringGrandpa };
   }
 
-  static async CreateKeysAura(count: number, mnemo: string): Promise<Keyring> {
+  static async CreateAuraKeys(count: number, mnemo: string): Promise<Keyring> {
     await cryptoWaitReady();
     if (!mnemonicValidate(mnemo)) throw new Error('Mnemonic phrase not valid');
 
@@ -56,7 +56,7 @@ export class SpecBuilder {
     return keyring;
   }
 
-  static async CreateKeysGranpa(count: number, mnemo: string): Promise<Keyring> {
+  static async CreateGrandpaKeys(count: number, mnemo: string): Promise<Keyring> {
     await cryptoWaitReady();
     if (!mnemonicValidate(mnemo)) throw new Error('Mnemonic phrase not valid');
 
