@@ -3,10 +3,16 @@
   "singleQuote": true,
   "trailingComma": "es5",
   "printWidth": 120,
+  "tabWidth": 2,
   "overrides": [
     {
-      "files": [".*", "*.json"],
-      "options": { "parser": "json" }
+      "files": [
+        ".*",
+        "*.json"
+      ],
+      "options": {
+        "parser": "json"
+      }
     }
   ]
 }
