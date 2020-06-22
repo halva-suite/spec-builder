@@ -6,26 +6,26 @@ export class JsonSpecBuilder {
     this.SpecSchema = Convert.toSpecSchema(json);
   }
 
-  public addGrandpaAuthorities(value: Array<number | string>) {
+  public addGrandpaAuthorities(value: Array<number | string>): void {
     this.SpecSchema.genesis.runtime.grandpa.authorities.push(value);
   }
 
-  public AddAuraAuthorities(value: string) {
+  public AddAuraAuthorities(value: string): void {
     this.SpecSchema.genesis.runtime.aura.authorities.push(value);
   }
 
-  public addBalanceArray(balance: Array<number | string>) {
+  public addBalanceArray(balance: Array<number | string>): void {
     this.SpecSchema.genesis.runtime.balances.balances.push(balance);
   }
 
-  public addBalance(key: string, value: number) {
+  public addBalance(key: string, value: number): void {
     this.SpecSchema.genesis.runtime.balances.balances.push([key, value]);
   }
 
-  public get GetChainSpec() {
+  public get GetChainSpec(): SpecSchema {
     return this.SpecSchema;
   }
-  public get GetChainData() {
+  public get GetChainData(): string {
     return Convert.specSchemaToJson(this.SpecSchema);
   }
 }

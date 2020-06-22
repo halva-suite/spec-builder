@@ -15,10 +15,10 @@ export const loadFromEncodingFile = (path: string, encoding: BufferEncoding): Js
   return new JsonSpecBuilder(readFileSync(path, encoding));
 };
 
-export const writeToFile = (path: string, data: string) => {
+export const writeToFile = (path: string, data: string): void => {
   writeFileSync(path, data, 'utf8');
 };
 
-export const writeTonEcodingFile = (path: string, data: string, encoding: BufferEncoding) => {
+export const writeTonEcodingFile = (path: string, data: string, encoding: BufferEncoding): void => {
   writeFileSync(path, data, encoding);
 };
