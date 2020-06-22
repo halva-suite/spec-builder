@@ -2,7 +2,7 @@ import Keyring from '@polkadot/keyring';
 import { cryptoWaitReady, mnemonicValidate, mnemonicGenerate } from '@polkadot/util-crypto';
 import { u8aToHex } from '@polkadot/util';
 import { loadFromJSON, loadFromFile, writeToFile } from '.';
-import KeyringBundle from './Entity/KeyringBundle';
+import KeyringBundle from './entity/KeyringBundle';
 export class SpecBuilder {
   static async CreateAccountsFromJSON(
     count: number,
@@ -15,11 +15,11 @@ export class SpecBuilder {
     const keyringGrandpa = await this.CreateKeysGranpa(count, mnemo);
     const jsonSpec = loadFromJSON(json);
     const pairsAura = keyringAura.getPairs();
-    const pairsGranndpa = keyringGrandpa.getPairs();
+    const pairsGrandpa = keyringGrandpa.getPairs();
     for (let i = 0; i < pairsAura.length; i++) {
       jsonSpec.addBalance(pairsAura[i].publicKey.toString(), balance);
       jsonSpec.AddAuraAuthorities(pairsAura[i].publicKey.toString());
-      jsonSpec.addGrandpaAuthorities([pairsGranndpa[i].publicKey.toString(), 1]);
+      jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].publicKey.toString(), 1]);
     }
     return new KeyringBundle(keyringAura, keyringGrandpa);
   }
@@ -30,11 +30,11 @@ export class SpecBuilder {
     const keyringGrandpa = await this.CreateKeysGranpa(count, mnemo);
     const jsonSpec = loadFromFile(path);
     const pairsAura = keyringAura.getPairs();
-    const pairsGranndpa = keyringGrandpa.getPairs();
+    const pairsGrandpa = keyringGrandpa.getPairs();
     for (let i = 0; i < pairsAura.length; i++) {
       jsonSpec.addBalance(pairsAura[i].address, balance);
       jsonSpec.AddAuraAuthorities(pairsAura[i].address);
-      jsonSpec.addGrandpaAuthorities([pairsGranndpa[i].address, 1]);
+      jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].address, 1]);
     }
     writeToFile(path, jsonSpec.GetChainData);
     return new KeyringBundle(keyringAura, keyringGrandpa);
@@ -49,7 +49,7 @@ export class SpecBuilder {
       keyring.addPair(keyring.createFromUri(`${mnemo}//0/${i}`));
     }
     const pairs = keyring.getPairs();
-    console.log('\n Aura keys  (public | adress):');
+    console.log('\n Aura keys  (public | address):');
     for (let i = 0; i < pairs.length; i++) {
       console.log(`${u8aToHex(pairs[i].publicKey)} ------ ${pairs[i].address}`);
     }
@@ -65,7 +65,7 @@ export class SpecBuilder {
       keyring.addPair(keyring.createFromUri(`${mnemo}//${i}`));
     }
     const pairs = keyring.getPairs();
-    console.log('\n Grandpa keys (public | adress):');
+    console.log('\n Grandpa keys (public | address):');
     for (let i = 0; i < pairs.length; i++) {
       console.log(`${u8aToHex(pairs[i].publicKey)} ------ ${pairs[i].address}`);
     }
