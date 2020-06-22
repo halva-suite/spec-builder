@@ -18,7 +18,7 @@ export class SpecBuilder {
     const pairsGrandpa = keyringGrandpa.getPairs();
     for (let i = 0; i < pairsAura.length; i++) {
       jsonSpec.addBalance(pairsAura[i].publicKey.toString(), balance);
-      jsonSpec.AddAuraAuthorities(pairsAura[i].publicKey.toString());
+      jsonSpec.addAuraAuthorities(pairsAura[i].publicKey.toString());
       jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].publicKey.toString(), 1]);
     }
     return { Aura: keyringAura, Grandpa: keyringGrandpa };
@@ -33,7 +33,7 @@ export class SpecBuilder {
     const pairsGrandpa = keyringGrandpa.getPairs();
     for (let i = 0; i < pairsAura.length; i++) {
       jsonSpec.addBalance(pairsAura[i].address, balance);
-      jsonSpec.AddAuraAuthorities(pairsAura[i].address);
+      jsonSpec.addAuraAuthorities(pairsAura[i].address);
       jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].address, 1]);
     }
     writeToFile(path, jsonSpec.GetChainData);
