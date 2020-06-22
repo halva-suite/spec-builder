@@ -1,4 +1,4 @@
-import { SpecSchema, Convert } from './SpecSchema';
+import { SpecSchema, Convert } from '../generated-src/SpecSchema';
 
 export class JsonSpecBuilder {
   SpecSchema: SpecSchema;

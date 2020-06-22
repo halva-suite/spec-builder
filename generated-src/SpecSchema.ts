@@ -1,10 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
-/* eslint-disable no-empty */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-prototype-builtins */
+/* eslint-disable */
 // To parse this data:
 //
 //   import { Convert, SpecSchema } from "./file";
