@@ -7,7 +7,7 @@ npm install halva-spec-builder
 ```
 ## Use Module
 
-  Use middleware runner
+### Use middleware runner
 
   ```javascript
   const spec = await HalvaSpecModifier.init('path/to/spec.json', 100, 10)
@@ -18,7 +18,7 @@ npm install halva-spec-builder
   spec.output('/path/from/save/shc.json');
   ```
 
-# Create custom middleware
+### Create custom middleware
 
  ```javascript
   .apply((context: HalvaMiddlewareContext): any => {
@@ -30,7 +30,7 @@ npm install halva-spec-builder
 })
  ```
 
-# Context structure
+### Context structure
 
   ```javascript
 interface HalvaMiddlewareContext {
@@ -46,7 +46,7 @@ interface HalvaMiddlewareContext {
   ```
 
 
-# Use cli
+### Use cli
   ```bash
   spec-builder -i /path/to/spec.json 
   ```
@@ -59,7 +59,7 @@ interface HalvaMiddlewareContext {
   spec-builder -i /path/to/spec.json -a 100 -b 1152921504606847000 -m clip organ olive upper oak void inject side suit toilet stick narrow
   ```
 
-# Or use a module TypeScript
+### Or use a module TypeScript
   ```javascript
  import { SpecBuilder } from 'halva-spec-builder';
 
