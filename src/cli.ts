@@ -12,6 +12,9 @@ const options = yargs
   .option('a', { alias: 'count', describe: `Count (default: ${a})`, type: 'number' })
   .option('i', { alias: 'path', describe: 'Path to spec.json', type: 'string', demandOption: true })
   .option('m', { alias: 'mnemonic', describe: 'Mnemonic phrase (default: auto-gen)', type: 'string' })
+  .option('am', { alias: 'auraMiddleware', describe: 'Add aura Authorities', type: 'boolean' })
+  .option('bm', { alias: 'balanceMiddleware', describe: 'Add balance Authorities', type: 'boolean' })
+  .option('gm', { alias: 'grandpaMiddleware', describe: 'Add grandpa Authorities', type: 'boolean' })
   .option('b', { alias: 'balance', describe: `Balance (default: ${balance})`, type: 'number' }).argv;
 
 if (!options.i) {
@@ -27,7 +30,10 @@ if (options.b) {
 }
 if (options.m) {
   mnemonic = options.m;
-  SpecBuilder.CreateAccounts(a, balance, specPath, mnemonic);
+  if (!options.am && !options.bm && !options.gm)
+    SpecBuilder.CreateAccounts(a, balance, specPath, true, true, true, mnemonic);
+  else SpecBuilder.CreateAccounts(a, balance, specPath, options.am, options.bm, options.gm, mnemonic);
 } else {
-  SpecBuilder.CreateAccounts(a, balance, specPath);
+  if (!options.am && !options.bm && !options.gm) SpecBuilder.CreateAccounts(a, balance, specPath, true, true, true);
+  else SpecBuilder.CreateAccounts(a, balance, specPath, options.am, options.bm, options.gm);
 }

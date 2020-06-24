@@ -59,6 +59,13 @@ interface HalvaMiddlewareContext {
   spec-builder -i /path/to/spec.json -a 100 -b 1152921504606847000 -m clip organ olive upper oak void inject side suit toilet stick narrow
   ```
 
+
+#### You can also use separate middleware when working with cli
+  ```bash
+  spec-builder -i /path/to/spec.json --am --bm // am - AuraMiddleware bm - BalanceMiddleware 
+                                               //The grandpa block will not be filled, because the gm argument is missing
+  ```
+
 ### Or use a module TypeScript
   ```javascript
  import { SpecBuilder } from 'halva-spec-builder';
