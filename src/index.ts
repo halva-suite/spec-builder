@@ -3,6 +3,10 @@ import { JsonSpecBuilder } from './JsonSpecBuilder';
 
 export * from './SpecBuilder';
 export * from './HalvaSpecModifier';
+export * from './entity/KeyringBundle';
+export * from './middlewares/BalanceMiddleware';
+export * from './middlewares/auraMiddleware';
+export * from './middlewares/GrandpaMiddleware';
 
 export const loadFromJSON = (json: string): JsonSpecBuilder => {
   return new JsonSpecBuilder(json);
