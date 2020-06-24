@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 yarn typecheck
-yarn lint
+#yarn lint
 #yarn test
 
 rm -rf dist

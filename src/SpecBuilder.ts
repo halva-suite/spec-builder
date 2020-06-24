@@ -17,9 +17,9 @@ export class SpecBuilder {
     const pairsAura = keyringAura.getPairs();
     const pairsGrandpa = keyringGrandpa.getPairs();
     for (let i = 0; i < pairsAura.length; i++) {
-      jsonSpec.addBalance(pairsAura[i].publicKey.toString(), balance);
-      jsonSpec.addAuraAuthorities(pairsAura[i].publicKey.toString());
-      jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].publicKey.toString(), 1]);
+      jsonSpec.addBalance(pairsAura[i].address.toString(), balance);
+      jsonSpec.addAuraAuthorities(pairsAura[i].address.toString());
+      jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].address.toString(), 1]);
     }
     return { Aura: keyringAura, Grandpa: keyringGrandpa };
   }
