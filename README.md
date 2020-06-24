@@ -22,7 +22,7 @@ npm install halva-spec-builder
 
  **Use middleware runner**
 
-  ```typescript
+  ```javascript
   const spec = await HalvaSpecModifier.init('path/to/spec.json', 100, 10)
     .apply(auraMiddleware)
     .apply(balanceMiddleware)
@@ -33,7 +33,7 @@ npm install halva-spec-builder
 
  **Create custom middleware**
 
- ```typescript
+ ```javascript
   .apply((context: HalvaMiddlewareContext): any => {
   const ed25519pairs = context.ed25519Keys.getPairs();
   for (let i = 0; i < ed25519pairs.length; i++) {
@@ -45,7 +45,7 @@ npm install halva-spec-builder
 
  **Context structure**
 
-  ```typescript
+  ```javascript
 interface HalvaMiddlewareContext {
   jsonSchema: any;
   ed25519Keys: Keyring;
@@ -80,7 +80,7 @@ interface HalvaMiddlewareContext {
   ```
 
  **Or use a module TypeScript**
-  ```typescript
+  ```javascript
  import { SpecBuilder } from 'halva-spec-builder';
 
  SpecBuilder.CreateAccounts(100, 1000, 'path/to/spec.json', 'clip organ olive upper oak void inject side suit toilet stick narrow');
