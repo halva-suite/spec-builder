@@ -17,14 +17,22 @@ export class SpecBuilder {
     const pairsAura = keyringAura.getPairs();
     const pairsGrandpa = keyringGrandpa.getPairs();
     for (let i = 0; i < pairsAura.length; i++) {
-      jsonSpec.addBalance(pairsAura[i].publicKey.toString(), balance);
-      jsonSpec.addAuraAuthorities(pairsAura[i].publicKey.toString());
-      jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].publicKey.toString(), 1]);
+      jsonSpec.addBalance(pairsAura[i].address.toString(), balance);
+      jsonSpec.addAuraAuthorities(pairsAura[i].address.toString());
+      jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].address.toString(), 1]);
     }
     return { Aura: keyringAura, Grandpa: keyringGrandpa };
   }
 
-  static async CreateAccounts(count: number, balance: number, path: string, mnemo?: string): Promise<KeyringBundle> {
+  static async CreateAccounts(
+    count: number,
+    balance: number,
+    path: string,
+    am: boolean,
+    bm: boolean,
+    gm: boolean,
+    mnemo?: string
+  ): Promise<KeyringBundle> {
     if (!mnemo) mnemo = mnemonicGenerate();
     const keyringAura = await this.CreateAuraKeys(count, mnemo);
     const keyringGrandpa = await this.CreateGrandpaKeys(count, mnemo);
@@ -32,9 +40,9 @@ export class SpecBuilder {
     const pairsAura = keyringAura.getPairs();
     const pairsGrandpa = keyringGrandpa.getPairs();
     for (let i = 0; i < pairsAura.length; i++) {
-      jsonSpec.addBalance(pairsAura[i].address, balance);
-      jsonSpec.addAuraAuthorities(pairsAura[i].address);
-      jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].address, 1]);
+      if (bm) jsonSpec.addBalance(pairsAura[i].address, balance);
+      if (am) jsonSpec.addAuraAuthorities(pairsAura[i].address);
+      if (gm) jsonSpec.addGrandpaAuthorities([pairsGrandpa[i].address, 1]);
     }
     writeToFile(path, jsonSpec.GetChainData);
     return { Aura: keyringAura, Grandpa: keyringGrandpa };

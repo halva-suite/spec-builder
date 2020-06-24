@@ -1,9 +1,8 @@
-import { SpecSchema, Convert } from '../generated-src/SpecSchema';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export class JsonSpecBuilder {
-  SpecSchema: SpecSchema;
+  SpecSchema: any;
   constructor(json: string) {
-    this.SpecSchema = Convert.toSpecSchema(json);
+    this.SpecSchema = JSON.parse(json);
   }
 
   public addGrandpaAuthorities(value: Array<number | string>): void {
@@ -22,10 +21,10 @@ export class JsonSpecBuilder {
     this.SpecSchema.genesis.runtime.balances.balances.push([key, value]);
   }
 
-  public get GetChainSpec(): SpecSchema {
+  public get GetChainSpec(): any {
     return this.SpecSchema;
   }
   public get GetChainData(): string {
-    return Convert.specSchemaToJson(this.SpecSchema);
+    return JSON.parse(this.SpecSchema);
   }
 }

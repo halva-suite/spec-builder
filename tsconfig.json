@@ -15,7 +15,7 @@
     "pretty": true
   },
   "include": [
-    "src", "generated-src/SpecSchema.ts"
+    "src"
   ],
   "exclude": [
     "src/_tests_",
