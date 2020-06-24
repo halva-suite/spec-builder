@@ -62,8 +62,8 @@ interface HalvaMiddlewareContext {
 
 #### You can also use separate middleware when working with cli
   ```bash
-  spec-builder -i /path/to/spec.json --am --bm // am - AuraMiddleware bm - BalanceMiddleware 
-                                               //The grandpa block will not be filled, because the gm argument is missing
+  spec-builder -i /path/to/spec.json --am --bm # am - AuraMiddleware bm - BalanceMiddleware 
+                                               #The grandpa block will not be filled, because the --gm argument is missing
   ```
 
 ### Or use a module TypeScript
