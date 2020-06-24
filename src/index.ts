@@ -1,7 +1,12 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { JsonSpecBuilder } from './JsonSpecBuilder';
+import { HalvaSpecModifier } from './HalvaSpecModifier';
+import { balanceMiddleware } from './middlewares/BalanceMiddleware';
+import { grandpaMiddleware } from './middlewares/GrandpaMiddleware';
+import { auraMiddleware } from './middlewares/auraMiddleware';
 
 export * from './SpecBuilder';
+export * from './HalvaSpecModifier';
 
 export const loadFromJSON = (json: string): JsonSpecBuilder => {
   return new JsonSpecBuilder(json);

@@ -1,9 +1,10 @@
 import { writeToFile, SpecBuilder } from '.';
 import Keyring from '@polkadot/keyring';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
+import { readFileSync } from 'fs';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type Middleware = (context: HalvaMiddlewareContext) => any;
+type Middleware<T> = (context: HalvaMiddlewareContext) => any;
 
 export default interface HalvaMiddlewareContext {
   jsonSchema: any;
@@ -25,21 +26,23 @@ export class HalvaMiddlewareRunner {
   customArgs: any;
   ed25519Keys: Keyring;
   sr25519Keys: Keyring;
-  middlewares: Middleware[];
+  middlewares: Middleware<HalvaMiddlewareContext>[];
   constructor(path: string, balance: number, count: number, customArgs?: any) {
     this.balance = balance;
     this.count = count;
     this.path = path;
+    this.middlewares = [];
     if (customArgs) this.customArgs = customArgs;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  apply(middleware: Middleware): HalvaMiddlewareRunner {
-    this.middlewares.push(middleware);
+  apply(...middleware: Middleware<HalvaMiddlewareContext>[]): HalvaMiddlewareRunner {
+    this.middlewares.push(...middleware);
     return this;
   }
 
-  async run(json: string): Promise<HalvaMiddlewareRunner> {
+  async run(json?: string): Promise<HalvaMiddlewareRunner> {
+    if (!json) json = readFileSync(this.path, 'utf8');
     if (!this.mnemonic) this.mnemonic = mnemonicGenerate();
     this.ed25519Keys = await SpecBuilder.CreateGrandpaKeys(this.count, this.mnemonic);
     this.sr25519Keys = await SpecBuilder.CreateAuraKeys(this.count, this.mnemonic);
@@ -71,7 +74,7 @@ export class HalvaMiddlewareRunner {
 }
 
 export class HalvaSpecModifier {
-  init(path: string, balance: number, count: number): HalvaMiddlewareRunner {
+  static init(path: string, balance: number, count: number): HalvaMiddlewareRunner {
     return new HalvaMiddlewareRunner(path, balance, count);
   }
 }

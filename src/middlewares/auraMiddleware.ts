@@ -7,4 +7,5 @@ export const auraMiddleware = (context: HalvaMiddlewareContext): any => {
   for (let i = 0; i < pairsAura.length; i++) {
     context.jsonSchema.genesis.runtime.aura.authorities.push(pairsAura[i].address);
   }
+  return context.jsonSchema;
 };
