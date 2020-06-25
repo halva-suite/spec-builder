@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 import yargs from 'yargs';
-import { SpecBuilder } from './index';
+import { HalvaSpecModifier } from './HalvaSpecModifier';
+import { auraMiddleware } from './middlewares/AuraMiddleware';
+import { grandpaMiddleware } from './middlewares/GrandpaMiddleware';
+import { balanceMiddleware } from './middlewares/BalanceMiddleware';
+import { keyloggerMiddleware } from './middlewares/KeyloggerMiddleware';
 
 let a = 10;
 let specPath = '';
 let balance = 1000000;
-let mnemonic = '';
+let mnemonic: string;
 
 const options = yargs
   .usage('Usage: $0 [options]')
@@ -30,10 +34,16 @@ if (options.b) {
 }
 if (options.m) {
   mnemonic = options.m;
-  if (!options.am && !options.bm && !options.gm)
-    SpecBuilder.CreateAccounts(a, balance, specPath, true, true, true, mnemonic);
-  else SpecBuilder.CreateAccounts(a, balance, specPath, options.am, options.bm, options.gm, mnemonic);
-} else {
-  if (!options.am && !options.bm && !options.gm) SpecBuilder.CreateAccounts(a, balance, specPath, true, true, true);
-  else SpecBuilder.CreateAccounts(a, balance, specPath, options.am, options.bm, options.gm);
 }
+
+async function start(): Promise<void> {
+  let builder = HalvaSpecModifier.init(specPath, balance, a);
+  if (mnemonic) builder = builder.setMnemonic(mnemonic);
+  if (options.am) builder = builder.apply(auraMiddleware);
+  if (options.gm) builder = builder.apply(grandpaMiddleware);
+  if (options.bm) builder = builder.apply(balanceMiddleware);
+  builder = builder.apply(keyloggerMiddleware);
+  (await builder.run()).output(specPath);
+}
+
+start();

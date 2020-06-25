@@ -1,7 +1,8 @@
-import { writeToFile, SpecBuilder } from '.';
+import { HalvaKeyring } from '.';
 import Keyring from '@polkadot/keyring';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import { readFileSync } from 'fs';
+import { writeToFile } from './helpers/FileHelper';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type Middleware<T> = (context: HalvaMiddlewareContext) => any;
@@ -44,8 +45,8 @@ export class HalvaMiddlewareRunner {
   async run(json?: string): Promise<HalvaMiddlewareRunner> {
     if (!json) json = readFileSync(this.path, 'utf8');
     if (!this.mnemonic) this.mnemonic = mnemonicGenerate();
-    this.ed25519Keys = await SpecBuilder.CreateGrandpaKeys(this.count, this.mnemonic);
-    this.sr25519Keys = await SpecBuilder.CreateAuraKeys(this.count, this.mnemonic);
+    this.ed25519Keys = await HalvaKeyring.CreateGrandpaKeys(this.count, this.mnemonic);
+    this.sr25519Keys = await HalvaKeyring.CreateAuraKeys(this.count, this.mnemonic);
     this.jsonSchema = JSON.parse(json);
     if (!this.middlewares.length) throw new Error('Middlewares is null');
     for (const m of this.middlewares) {
