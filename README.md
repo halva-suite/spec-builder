@@ -79,17 +79,9 @@ interface HalvaMiddlewareContext {
                                                #The grandpa block will not be filled, because the --gm argument is missing
   ```
 
- **Or use a module TypeScript**
-  ```javascript
- import { SpecBuilder } from 'halva-spec-builder';
-
- SpecBuilder.CreateAccounts(100, 1000, 'path/to/spec.json', 'clip organ olive upper oak void inject side suit toilet stick narrow');
-
- //If there is no mnemonic phrase, it will be generated automatically
- SpecBuilder.CreateAccounts(100, 1000, 'path/to/spec.json');
-  ```
 
 ### Script Commands
+--- 
 
 * `yarn test` -- Runs tests.
 * `yarn typecheck` -- Checks TypeScript types for correctness. This is disabled during tests for performance reasons.
@@ -98,6 +90,8 @@ interface HalvaMiddlewareContext {
 * `yarn build` -- Regenerates `dist` folder that gets included into NPM module.
 
 ### Contributing
+---
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
