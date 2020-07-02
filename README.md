@@ -1,5 +1,31 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/halva-suite/PoC">
+    <img src="https://avatars2.githubusercontent.com/u/67451441?s=400&u=16f743b727e0d20fb8883c9794a87c9d5732fe67&v=4" alt="Logo" width="100" height="100">
+  </a>
+
+  <h3 align="center">Halva Spec Builder</h3>
+
+  <p align="center">
+    ⚠️ (Work In Progress)
+    <br />
+    <a href="https://github.com/halva-suite/spec-builder/issues">Report Bug</a> |
+    <a href="https://github.com/halva-suite/spec-builder/pulls">Request Feature</a>
+  </p>
+</p>
+
+<!-- ABOUT THE PROJECT -->
+
+
 ## Spec-Builder
----
+
 
 This npm module is a chain specification file modifier for a Substrate node.
 
