@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/halva-suite/PoC">
-    <img src="https://i.imgur.com/mJQhWZA.jpg" alt="Logo" width="100" height="100">
+    <img src="https://i.imgur.com/mJQhWZA.jpg" alt="Logo" width="300" height="300">
   </a>
 
   <h3 align="center">Halva Spec Builder</h3>
