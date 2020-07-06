@@ -2,7 +2,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/halva-suite/PoC">
+  <a href="https://github.com/halva-suite/spec-builder">
     <img src="https://i.imgur.com/mJQhWZA.jpg" alt="Logo" width="300" height="300">
   </a>
 
