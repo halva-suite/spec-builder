@@ -5,7 +5,7 @@ export const auraMiddleware = (context: HalvaMiddlewareContext): any => {
   if (!context.jsonSchema.genesis?.runtime?.palletAura?.authorities) throw new Error('Invalid JSON');
   const pairsAura = context.sr25519Keys.getPairs();
   for (let i = 0; i < pairsAura.length; i++) {
-    context.jsonSchema.genesis.runtime.aura.authorities.push(pairsAura[i].address);
+    context.jsonSchema.genesis.runtime.palletAura.authorities.push(pairsAura[i].address);
   }
   return context.jsonSchema;
 };
