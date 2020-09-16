@@ -35,7 +35,7 @@ This npm module is a chain specification file modifier for a Substrate node.
 ---
 
 ```bash
-npm install halva-spec-builder
+npm install @halva-suite/halva-spec-builder
 ```
 ### Use Module
 ---
