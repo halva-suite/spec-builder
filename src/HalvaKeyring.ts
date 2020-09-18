@@ -1,6 +1,5 @@
 import Keyring from '@polkadot/keyring';
 import { cryptoWaitReady, mnemonicValidate } from '@polkadot/util-crypto';
-import { u8aToHex } from '@polkadot/util';
 export class HalvaKeyring {
   static async CreateAuraKeys(count: number, mnemo: string): Promise<Keyring> {
     await cryptoWaitReady();
