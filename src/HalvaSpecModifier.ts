@@ -70,7 +70,7 @@ export class HalvaMiddlewareRunner {
   }
 
   output(path: string): void {
-    writeToFile(path, JSON.stringify(this.jsonSchema));
+    writeToFile(path, JSON.stringify(this.jsonSchema, null, 2));
   }
 }
 
