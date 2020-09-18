@@ -10,11 +10,6 @@ export class HalvaKeyring {
     for (let i = 0; i < count; i++) {
       keyring.addPair(keyring.createFromUri(`${mnemo}//0/${i}`));
     }
-    const pairs = keyring.getPairs();
-    console.log('\n Aura keys  (public | address):');
-    for (let i = 0; i < pairs.length; i++) {
-      console.log(`${u8aToHex(pairs[i].publicKey)} ------ ${pairs[i].address}`);
-    }
     return keyring;
   }
 
@@ -25,11 +20,6 @@ export class HalvaKeyring {
     const keyring = new Keyring({ type: 'ed25519' });
     for (let i = 0; i < count; i++) {
       keyring.addPair(keyring.createFromUri(`${mnemo}//${i}`));
-    }
-    const pairs = keyring.getPairs();
-    console.log('\n Grandpa keys (public | address):');
-    for (let i = 0; i < pairs.length; i++) {
-      console.log(`${u8aToHex(pairs[i].publicKey)} ------ ${pairs[i].address}`);
     }
     return keyring;
   }
