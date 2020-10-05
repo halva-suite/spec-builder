@@ -8,7 +8,7 @@ import { keyloggerMiddleware } from './middlewares/KeyloggerMiddleware';
 
 let a = 10;
 let specPath = '';
-let balance = 1000000;
+let balance = '1152921504606847000';
 let mnemonic: string;
 
 const options = yargs
@@ -19,7 +19,7 @@ const options = yargs
   .option('am', { alias: 'auraMiddleware', describe: 'Add aura Authorities', type: 'boolean' })
   .option('bm', { alias: 'balanceMiddleware', describe: 'Add balance Authorities', type: 'boolean' })
   .option('gm', { alias: 'grandpaMiddleware', describe: 'Add grandpa Authorities', type: 'boolean' })
-  .option('b', { alias: 'balance', describe: `Balance (default: ${balance})`, type: 'number' }).argv;
+  .option('b', { alias: 'balance', describe: `Balance (default: ${balance})`, type: 'string' }).argv;
 
 if (!options.i) {
   throw new Error('Path is empty');

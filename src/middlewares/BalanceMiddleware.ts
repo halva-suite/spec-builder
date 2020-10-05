@@ -3,9 +3,16 @@ import HalvaMiddlewareContext from '../HalvaSpecModifier';
 
 export const balanceMiddleware = (context: HalvaMiddlewareContext): any => {
   if (!context.jsonSchema.genesis?.runtime?.palletBalances?.balances) throw new Error('Invalid JSON');
-  const pairsAura = context.sr25519Keys.getPairs();
-  for (let i = 0; i < pairsAura.length; i++) {
-    context.jsonSchema.genesis.runtime.palletBalances.balances.push([pairsAura[i].address, context.balance]);
-  }
+  const keys = [...context.sr25519Keys.getPairs(), ...context.ed25519Keys.getPairs()];
+  const { balances } = context.jsonSchema.genesis.runtime.palletBalances;
+
+  context.jsonSchema.genesis.runtime.palletBalances.balances = [
+    ...balances,
+    ...keys.map((pair) => ([
+      pair.address,
+      parseInt(context.balance, 10),
+    ]),
+  )];
+
   return context.jsonSchema;
 };

@@ -2,8 +2,8 @@
   "name": "halva-spec-builder",
   "version": "1.0.0",
   "scripts": {
-    "test": "yarn jest --detectOpenHandles",
-    "typecheck": "yarn tsc --project ./tsconfig-typecheck.json",
+    "test": "jest --detectOpenHandles",
+    "typecheck": "tsc --project ./tsconfig-typecheck.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "build": "./scripts/build.sh",

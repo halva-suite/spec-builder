@@ -5,4 +5,5 @@ export * from './middlewares/BalanceMiddleware';
 export * from './middlewares/AuraMiddleware';
 export * from './middlewares/SessionMiddleware'
 export * from './middlewares/GrandpaMiddleware';
+export * from './middlewares/KeyloggerMiddleware';
 export * from './helpers/FileHelper';
