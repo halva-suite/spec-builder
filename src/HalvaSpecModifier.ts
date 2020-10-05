@@ -14,7 +14,7 @@ export default interface HalvaMiddlewareContext {
   customArgs: any;
   path: string;
   mnemonic: string;
-  balance: number;
+  balance: string;
   count: number;
 }
 
@@ -22,13 +22,13 @@ export class HalvaMiddlewareRunner {
   path: string;
   mnemonic: string;
   jsonSchema: any;
-  balance: number;
+  balance: string;
   count: number;
   customArgs: any;
   ed25519Keys: Keyring;
   sr25519Keys: Keyring;
   middlewares: Middleware<HalvaMiddlewareContext>[];
-  constructor(path: string, balance: number, count: number, customArgs?: any) {
+  constructor(path: string, balance: string, count: number, customArgs?: any) {
     this.balance = balance;
     this.count = count;
     this.path = path;
@@ -45,8 +45,8 @@ export class HalvaMiddlewareRunner {
   async run(json?: string): Promise<HalvaMiddlewareRunner> {
     if (!json) json = readFileSync(this.path, 'utf8');
     if (!this.mnemonic) this.mnemonic = mnemonicGenerate();
-    this.ed25519Keys = await HalvaKeyring.CreateGrandpaKeys(this.count, this.mnemonic);
-    this.sr25519Keys = await HalvaKeyring.CreateAuraKeys(this.count, this.mnemonic);
+    this.ed25519Keys = await HalvaKeyring.GenerateKeys(this.count, this.mnemonic, 'ed25519');
+    this.sr25519Keys = await HalvaKeyring.GenerateKeys(this.count, this.mnemonic, 'sr25519');
     this.jsonSchema = JSON.parse(json);
     if (!this.middlewares.length) throw new Error('Middlewares is null');
     for (const m of this.middlewares) {
@@ -75,7 +75,7 @@ export class HalvaMiddlewareRunner {
 }
 
 export class HalvaSpecModifier {
-  static init(path: string, balance: number, count: number): HalvaMiddlewareRunner {
+  static init(path: string, balance: string, count: number): HalvaMiddlewareRunner {
     return new HalvaMiddlewareRunner(path, balance, count);
   }
 }

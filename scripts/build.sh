@@ -1,8 +1,8 @@
 #!/bin/bash -ex
 
-yarn typecheck
-#yarn lint
-#yarn test
+npm run typecheck
+#npm lint
+#npm test
 
 rm -rf dist
 tsc -p .
